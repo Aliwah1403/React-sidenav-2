@@ -33,7 +33,7 @@ const ProjectNavigation = ({ selectedProject, isOpen, setSelectedProject }) => {
         duration: 0.25,
         ease: easeInOut,
       }}
-      className={`h-full flex flex-col gap-8 w-64 absolute bg-neutral-900 ml-0 ${
+      className={`h-full flex flex-col gap-8 w-64 absolute bg-tiber-900 ml-0 ${
         isOpen ? "left-64" : "left-20"
       } border-r border-neutral-800 p-5`}
     >
@@ -42,7 +42,7 @@ const ProjectNavigation = ({ selectedProject, isOpen, setSelectedProject }) => {
           {selectedProject}
         </h1>
         <button onClick={() => setSelectedProject(null)}>
-          <XMarkIcon className="w-8 stroke-neutral-400" />
+          <XMarkIcon className="w-8 stroke-neutral-400 hover:stroke-apple-600" />
         </button>
       </div>
       <input

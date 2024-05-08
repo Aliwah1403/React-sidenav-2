@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-neutral-950 font-urbanist;
+  @apply bg-white font-urbanist;
 }

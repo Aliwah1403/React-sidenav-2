@@ -70,7 +70,7 @@ const Navigation = () => {
   return (
     <>
       <motion.nav
-        className="bg-neutral-900 flex flex-col z-10 gap-20 p-5 absolute top-0 left-0 h-full shadow shadow-neutral-600"
+        className="bg-tiber-950 flex flex-col z-10 gap-20 p-5 absolute top-0 left-0 h-full shadow shadow-neutral-600"
         variants={containerVariants}
         animate={containerControls}
         initial="close"
