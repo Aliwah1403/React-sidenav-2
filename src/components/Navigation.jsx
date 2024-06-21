@@ -4,7 +4,7 @@ import {
   useAnimationControls,
   AnimatePresence,
 } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import NavigationLink from "./NavigationLink";
 import logo from "../assets/logo.png";
 import {
@@ -52,6 +52,8 @@ const Navigation = () => {
   const containerControls = useAnimationControls();
   const svgControls = useAnimationControls();
 
+  const sideBarRef = useRef(null);
+
   useEffect(() => {
     if (isOpen) {
       containerControls.start("open");
@@ -67,16 +69,30 @@ const Navigation = () => {
     setSelectedProject(null);
   };
 
+  const handleClickOutside = (event) => {
+    if (sideBarRef.current && !sideBarRef.current.contains(event.target)) {
+      setIsOpen(false);
+      setSelectedProject(null);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <motion.nav
+        ref={sideBarRef}
         className="bg-tiber-950 flex flex-col z-10 gap-20 p-5 absolute top-0 left-0 h-full shadow shadow-neutral-600"
         variants={containerVariants}
         animate={containerControls}
         initial="close"
       >
         <div className="flex flex-row w-full justify-between place-items-center">
-          {/* <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-700 rounded-full" /> */}
           <img src={logo} alt="Logo" className="w-10 h-10" />
           <button className="p-1 rounded-full flex" onClick={handleOpenClose}>
             <svg
@@ -99,27 +115,6 @@ const Navigation = () => {
                 }}
               />
             </svg>
-
-            {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1}
-            stroke="currentColor"
-            className="w-8 h-8 stroke-neutral-200"
-          >
-            <motion.path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              variants={svgVariants}
-              animate={svgControls}
-              transition={{
-                duration: 0.5,
-                ease: easeInOut,
-              }}
-            />
-          </svg> */}
           </button>
         </div>
         <div className="flex flex-col gap-3">
